@@ -21,13 +21,13 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Scripts","folderPath":"folders/Scripts.yy","tags":[
         "Asset.Script",
       ],},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Feature Setters","folderPath":"folders/Scripts/Feature Setters.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Fluent Interface","folderPath":"folders/Scripts/Fluent Interface.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Macro Hacks","folderPath":"folders/Scripts/Macro Hacks.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sequences","folderPath":"folders/Sequences.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sounds","folderPath":"folders/Sounds.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Sprites","folderPath":"folders/Sprites.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"DiabloOrbStuff","folderPath":"folders/Sprites/DiabloOrbStuff.yy",},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Feature Setters","folderPath":"folders/Scripts/Feature Setters.yy",},
   ],
   "IncludedFiles": [],
   "isEcma": false,
@@ -60,7 +60,6 @@
   },
   "resources": [
     {"id":{"name":"Sprite14","path":"sprites/Sprite14/Sprite14.yy",},},
-    {"id":{"name":"Sound1","path":"sounds/Sound1/Sound1.yy",},},
     {"id":{"name":"Sequence3","path":"sequences/Sequence3/Sequence3.yy",},},
     {"id":{"name":"itsmars_orb_shadow","path":"sprites/itsmars_orb_shadow/itsmars_orb_shadow.yy",},},
     {"id":{"name":"SqueeUIFuncs","path":"scripts/SqueeUIFuncs/SqueeUIFuncs.yy",},},
