@@ -24,7 +24,7 @@
     {"name":"Object2","order":1,"path":"objects/Object2/Object2.yy",},
     {"name":"SequenceUtilFuncs","order":4,"path":"scripts/SequenceUtilFuncs/SequenceUtilFuncs.yy",},
     {"name":"KeyframeWrappers","order":2,"path":"scripts/KeyframeWrappers/KeyframeWrappers.yy",},
-    {"name":"Sequence1_Events2","order":10,"path":"scripts/Sequence1_Events2/Sequence1_Events2.yy",},
+    {"name":"Sequence1_Events2","order":1,"path":"scripts/Sequence1_Events2/Sequence1_Events2.yy",},
     {"name":"itsmars_orb_fill12","order":9,"path":"sprites/itsmars_orb_fill12/itsmars_orb_fill12.yy",},
     {"name":"License stuff","order":8,"path":"notes/License stuff/License stuff.yy",},
     {"name":"itsmars_orb_back2","order":1,"path":"sprites/itsmars_orb_back2/itsmars_orb_back2.yy",},

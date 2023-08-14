@@ -5,7 +5,7 @@
   "isCompatibility": false,
   "isDnD": false,
   "parent": {
-    "name": "Better Sequences Stuff",
-    "path": "Better Sequences Stuff.yyp",
+    "name": "Sequences",
+    "path": "folders/Sequences.yy",
   },
 }
