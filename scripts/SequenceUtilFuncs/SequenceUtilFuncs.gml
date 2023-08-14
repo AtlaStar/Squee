@@ -50,3 +50,14 @@ function sequence_instance_flatten(_tracks = undefined, _array = []) {
 		array_pop(_array)
 	}
 }
+
+
+function event_step_replacement() {
+	static completed = false
+	if !completed {
+		sequence_instance_flatten();
+		completed = true;
+	}
+	original_step_event();
+}
+asset_add_tags(event_step_replacement, ["SqueeUIEnabledFeature","SqueeUIReplacementFunction"], asset_script)

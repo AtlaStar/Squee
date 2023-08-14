@@ -114,7 +114,7 @@ function layer_gui_sequence_create(layer_id, x, y, sequence) {
 						layer_sequence_y(elem.seq, elem.y + yoff)
 					}
 				}
-				//array_foreach(sequences, method({layer_id, xoff, yoff},func))
+				array_foreach(sequences, method({layer_id, xoff, yoff},func))
 			}
 		}
 		
@@ -160,8 +160,8 @@ function layer_gui_sequence_create(layer_id, x, y, sequence) {
 		surfaces[$ layer_id] = SqueeUI.layer_gui_global_surface
 		var struct = {layer_id}
 		sequences[$ layer_id] = []
-		//var _method = method(struct, layer_func)
-		//active_sequences[$ layer_id] = _method
+		var _method = method(struct, layer_func)
+		active_sequences[$ layer_id] = _method
 		layer_script_begin(layer_id, layer_func)
 		layer_script_end(layer_id, method(struct,layer_end_draw))
 	}

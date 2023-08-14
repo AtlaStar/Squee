@@ -37,14 +37,3 @@ function __squee_ui_layer_sequence_create(layer_id, x, y, sequence_id) {
 }
 // Feather disable once GM2017
 #macro layer_sequence_create __squee_ui_layer_sequence_create
-
-function event_step_replacement() {
-	static completed = false
-	if !completed {
-		sequence_instance_flatten();
-		completed = true;
-	}
-	original_step_event();
-}
-
-asset_add_tags(event_step_replacement, ["SqueeUIEnabledFeature","SqueeUIReplacementFunction"], asset_script)

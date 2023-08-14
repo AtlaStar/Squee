@@ -16,10 +16,8 @@
   ],
   "ResourceOrderSettings": [
     {"name":"Sprite14","order":5,"path":"sprites/Sprite14/Sprite14.yy",},
-    {"name":"Sequence3","order":2,"path":"sequences/Sequence3/Sequence3.yy",},
     {"name":"itsmars_orb_shadow","order":5,"path":"sprites/itsmars_orb_shadow/itsmars_orb_shadow.yy",},
     {"name":"itsmars_orb_border","order":2,"path":"sprites/itsmars_orb_border/itsmars_orb_border.yy",},
-    {"name":"Sequence3_Events5","order":11,"path":"scripts/Sequence3_Events5/Sequence3_Events5.yy",},
     {"name":"Sprite13","order":4,"path":"sprites/Sprite13/Sprite13.yy",},
     {"name":"SequenceBuilder","order":3,"path":"scripts/SequenceBuilder/SequenceBuilder.yy",},
     {"name":"itsmars_orb_fill","order":3,"path":"sprites/itsmars_orb_fill/itsmars_orb_fill.yy",},
@@ -34,11 +32,9 @@
     {"name":"itsmars_scroll_fill","order":10,"path":"sprites/itsmars_scroll_fill/itsmars_scroll_fill.yy",},
     {"name":"Sprite3","order":2,"path":"sprites/Sprite3/Sprite3.yy",},
     {"name":"itsmars_orb_highlight","order":4,"path":"sprites/itsmars_orb_highlight/itsmars_orb_highlight.yy",},
-    {"name":"Sequence2","order":1,"path":"sequences/Sequence2/Sequence2.yy",},
     {"name":"Font2","order":1,"path":"fonts/Font2/Font2.yy",},
     {"name":"TrackWrappers","order":4,"path":"scripts/TrackWrappers/TrackWrappers.yy",},
     {"name":"KeyframeProperties","order":1,"path":"scripts/KeyframeProperties/KeyframeProperties.yy",},
     {"name":"itsmars_scroll_lip","order":7,"path":"sprites/itsmars_scroll_lip/itsmars_scroll_lip.yy",},
-    {"name":"Sequence2_Events11","order":12,"path":"scripts/Sequence2_Events11/Sequence2_Events11.yy",},
   ],
 }
