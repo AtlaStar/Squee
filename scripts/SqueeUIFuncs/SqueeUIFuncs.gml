@@ -169,3 +169,4 @@ function layer_gui_sequence_create(layer_id, x, y, sequence) {
 	array_push(sequences[$ layer_id], s)
 	return seq
 }
+

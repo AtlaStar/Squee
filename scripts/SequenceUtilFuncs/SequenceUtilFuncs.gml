@@ -51,13 +51,51 @@ function sequence_instance_flatten(_tracks = undefined, _array = []) {
 	}
 }
 
+function __intern_squee_add_sequence_step_event(obj_sequence, _event = function(){}) {
+
+	if(!is_struct(obj_sequence)) {
+		obj_sequence = sequence_get(obj_sequence)	
+	}
+	
+	var _ret = {original_step_event: _event}
+	if variable_struct_exists(obj_sequence, "original_step_event") {
+		obj_sequence.original_step_event = _event;
+	}
+	return _ret
+}
+
+function squee_add_sequence_step_event(obj_sequence, _event = function(){}) {
+	if squee_is_enabled(_GMFUNCTION_) {
+		return __intern_squee_add_sequence_step_event(obj_sequence, _event)	
+	}
+}
+squee_enable_default(squee_add_sequence_step_event)
 
 function event_step_replacement() {
-	static completed = false
-	if !completed {
-		sequence_instance_flatten();
-		completed = true;
+	if squee_is_enabled("auto_flatten") {
+		auto_flatten();	
 	}
-	original_step_event();
+	try {
+		sequence.original_step_event();
+	} catch(e) {
+		show_debug_message(e)
+	}
 }
-asset_add_tags(event_step_replacement, ["SqueeUIEnabledFeature","SqueeUIReplacementFunction"], asset_script)
+squee_enable_default(event_step_replacement)
+
+///@context {struct.SequenceInstance}
+function auto_flatten() {
+	if !flatten_complete {
+		sequence_instance_flatten();
+		flatten_complete = true;
+	}
+}
+squee_enable_default(auto_flatten)
+
+function squee_enable_default(gm_func) {
+	asset_add_tags(gm_func, "SqueeUIEnabledFeature", asset_script)
+}
+
+function squee_is_enabled(_feature) {
+	return asset_has_any_tag(_feature, ["SqueeUIEnabledFeature", "SqueeEnabledFeature"], asset_script)	
+}

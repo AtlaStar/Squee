@@ -16,8 +16,6 @@ function Sequence1_event_clean_up()
 
 function Sequence1_event_step()
 {
-	//demonstration on how you can access named properties
-	show_debug_message(is_struct(hp_mask))
 }
 
 function Sequence1_event_step_begin()
