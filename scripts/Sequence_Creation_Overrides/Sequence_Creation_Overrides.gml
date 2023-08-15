@@ -2,6 +2,7 @@
 // https://help.yoyogames.com/hc/en-us/articles/360005277377 for more information
 #macro __INTERN_LAYER_SEQUENCE_CREATE__ layer_sequence_create
 
+///@returns {Id.SequenceElement}
 function __squee_ui_layer_sequence_create(layer_id, x, y, sequence_id) {
 	if(!is_struct(sequence_id)) {
 		sequence_id = sequence_get(sequence_id)	

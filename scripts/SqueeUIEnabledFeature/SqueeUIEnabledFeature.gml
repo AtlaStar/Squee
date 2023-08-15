@@ -4,12 +4,12 @@
 //enabled by default
 function enable_seq_event_step_replacement(predicate = function(args) {return true}, args = []) {
 	if predicate(args) {
-		asset_add_tags(event_step_replacement, "SqueeUIEnabledFeature", asset_script)
+		asset_add_tags("event_step_replacement", "SqueeUIEnabledFeature", asset_script)
 	}
 }
 function disable_seq_event_step_replacement(predicate = function(args) {return true}, args = []) {
 	if predicate(args) {
-		asset_remove_tags(event_step_replacement, "SqueeUIEnabledFeature", asset_script)
+		asset_remove_tags("event_step_replacement", "SqueeUIEnabledFeature", asset_script)
 	}
 }
 
