@@ -52,16 +52,12 @@ function sequence_instance_flatten(_tracks = undefined, _array = []) {
 }
 
 function __intern_squee_add_sequence_step_event(obj_sequence, _event = function(){}) {
-
 	if(!is_struct(obj_sequence)) {
-		obj_sequence = sequence_get(obj_sequence)	
+		obj_sequence = sequence_get(obj_sequence)
 	}
-	
-	var _ret = {original_step_event: _event}
-	if variable_struct_exists(obj_sequence, "original_step_event") {
-		obj_sequence.original_step_event = _event;
+	with(static_get(obj_sequence)) {
+		original_step_event = _event
 	}
-	return _ret
 }
 
 function squee_add_sequence_step_event(obj_sequence, _event = function(){}) {
@@ -72,9 +68,13 @@ function squee_add_sequence_step_event(obj_sequence, _event = function(){}) {
 squee_enable_default(squee_add_sequence_step_event)
 
 function event_step_replacement() {
-	if squee_is_enabled("auto_flatten") {
-		auto_flatten();	
+	if squee_is_enabled("squee_auto_flatten") {
+		squee_auto_flatten();
 	}
+	if squee_is_enabled("squee_track_callbacks") {
+		squee_track_callbacks()
+	}
+
 	try {
 		sequence.original_step_event();
 	} catch(e) {
@@ -84,18 +84,41 @@ function event_step_replacement() {
 squee_enable_default(event_step_replacement)
 
 ///@context {struct.SequenceInstance}
-function auto_flatten() {
+function squee_auto_flatten() {
 	if !flatten_complete {
 		sequence_instance_flatten();
-		flatten_complete = true;
+		static_get(self).flatten_complete = true;
 	}
 }
-squee_enable_default(auto_flatten)
+squee_enable_default(squee_auto_flatten)
+
+///@context {struct.SequenceInstance}
+function squee_track_callbacks() {
+	var _tracks = struct_get_names(self)
+	array_foreach(_tracks, function(_elem) {
+		var _call = tag_get_asset_ids(sequence.name + "_" +_elem, asset_script)
+		with(self[$ _elem]) {
+			array_foreach(_call, function(_elem) {
+				script_execute(_elem)
+			})
+		}
+	})
+}
+squee_enable_default(squee_track_callbacks)
+
+function squee_add_track_callback(obj_sequence, track_name, script_function) {
+	if !is_struct(obj_sequence) {
+		obj_sequence = sequence_get(obj_sequence)	
+	}
+
+	if is_method(script_function)
+		script_function = method_get_index(script_function)
+	asset_add_tags(script_function, $"{obj_sequence.name}_{track_name}", asset_script)
+}
 
 function squee_enable_default(gm_func) {
 	asset_add_tags(gm_func, "SqueeUIEnabledFeature", asset_script)
 }
-
 function squee_is_enabled(_feature) {
 	return asset_has_any_tag(_feature, ["SqueeUIEnabledFeature", "SqueeEnabledFeature"], asset_script)	
 }

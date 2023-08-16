@@ -16,6 +16,7 @@ function Sequence1_event_clean_up()
 
 function Sequence1_event_step()
 {
+	show_debug_message("sequence_1_event_step")
 }
 
 function Sequence1_event_step_begin()

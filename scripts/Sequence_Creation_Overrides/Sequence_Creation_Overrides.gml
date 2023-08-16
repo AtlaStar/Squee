@@ -10,21 +10,21 @@ function __squee_ui_layer_sequence_create(layer_id, x, y, sequence_id) {
 
 	//we keep at this scope so we can decide whether we need to shim our static into the sequence instances static chain if the feature is enabled.
 	if squee_is_enabled("event_step_replacement") {
+		show_debug_message("going to replace the step event")
 		var _event = sequence_id.event_step;
 		if !squee_is_enabled(_event) {
-			var _static
 			if is_callable(sequence_id.event_step) {
-				_static = __intern_squee_add_sequence_step_event(sequence_id, _event)
+				__intern_squee_add_sequence_step_event(sequence_id, _event)
 			} else {
-				_static = __intern_squee_add_sequence_step_event(sequence_id)
+				__intern_squee_add_sequence_step_event(sequence_id)
 			}
-			static_set(static_get(sequence_id), _static)
 		}
 		sequence_id.event_step = method(undefined , event_step_replacement)
 	}
 	var _ret = __INTERN_LAYER_SEQUENCE_CREATE__(layer_id, x, y, sequence_id)
 	var _inst = layer_sequence_get_instance(_ret)
-	_inst.flatten_complete = false;
+	static_get(_inst).flatten_complete = false;
+	show_debug_message("finished creating sequence")
 	return _ret
 }
 // Feather disable once GM2017
