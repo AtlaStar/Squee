@@ -1,13 +1,13 @@
 {
   "resourceType": "GMObject",
   "resourceVersion": "1.0",
-  "name": "Object2",
+  "name": "obj_sword_anchor_test",
   "eventList": [],
   "managed": true,
   "overriddenProperties": [],
   "parent": {
-    "name": "Objects",
-    "path": "folders/Objects.yy",
+    "name": "Tests",
+    "path": "folders/Objects/Squee_Helpers/Anchors/Tests.yy",
   },
   "parentObjectId": null,
   "persistent": false,
@@ -26,8 +26,8 @@
   "properties": [],
   "solid": false,
   "spriteId": {
-    "name": "Sprite3",
-    "path": "sprites/Sprite3/Sprite3.yy",
+    "name": "spr_anchor_test_spr",
+    "path": "sprites/spr_anchor_test_spr/spr_anchor_test_spr.yy",
   },
   "spriteMaskId": null,
   "visible": true,

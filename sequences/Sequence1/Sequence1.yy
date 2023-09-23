@@ -48,6 +48,9 @@
   "showBackdrop": true,
   "showBackdropImage": false,
   "spriteId": null,
+  "tags": [
+    "SqueeEnabled",
+  ],
   "timeUnits": 1,
   "tracks": [
     {"resourceType":"GMGraphicTrack","resourceVersion":"1.0","name":"itsmars_orb_border","builtinName":0,"events":[],"inheritsTrackColour":true,"interpolation":1,"isCreationTrack":false,"keyframes":{"resourceType":"KeyframeStore<AssetSpriteKeyframe>","resourceVersion":"1.0","Keyframes":[
