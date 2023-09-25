@@ -23,7 +23,7 @@
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Tests","folderPath":"folders/Objects/Squee_Helpers/Anchors/Tests.yy","tags":[
         "Unit Tests",
       ],},
-    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Particle Systems","folderPath":"folders/Particle Systems.yy",},
+    {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Particle Systems","folderPath":"folders/Rooms/Particle Systems.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Rooms","folderPath":"folders/Rooms.yy",},
     {"resourceType":"GMFolder","resourceVersion":"1.0","name":"Scripts","folderPath":"folders/Scripts.yy","tags":[
         "Asset.Script",

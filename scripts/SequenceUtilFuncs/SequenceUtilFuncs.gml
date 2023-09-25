@@ -173,3 +173,18 @@ function update_anchor_sequence(sequence_id) {
 }
 
 squee_enable_default(squee_auto_replace_anchors)
+
+
+function SqueeAnchorElement(layer_id, element) constructor {
+
+	var update_sequence = function() {
+		layer_sequence_x(seq_element, inst.x)
+		layer_sequence_y(seq_element, inst.y)
+	}
+	
+	inst = other;
+	seq_element = layer_sequence_create(layer_id, inst.x, inst.y, element)
+	sequence_instance_override_object(layer_sequence_get_instance(seq_element), inst.object_index, inst)
+	timesource = time_source_create(time_source_game, 1, time_source_units_frames, update_sequence, [],-1)
+	time_source_start(timesource)
+}

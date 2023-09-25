@@ -10,5 +10,3 @@ if keyboard_check(ord("D"))
 if place_meeting(x,y, Object2) {
 	hp = clamp(hp -0.05, 0, maxhp)
 }
-
-update_anchor_sequence(slots)

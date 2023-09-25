@@ -65,52 +65,92 @@ static_set(squee_cache.surfaces, {
 			return self[$ layer]
 	}
 })
-/// @desc Function Description
-/// @param {string} layer_id Description
-/// @param {real} x Description
-/// @param {real} y Description
-/// @param {asset.GMSequence} sequence Description
-/// @returns {id.SequenceElement} Description
-/// @self {Object1}
 
-function layer_gui_sequence_create(layer_id, x, y, sequence) {
-	
-	function layer_func() {
-		var surf = squee_cache.surfaces.get(layer)
+
+//TO-DO: after adding view binding, make it so that marked GUI layers are scaled to draw atop the bound view
+//Also, test if resizing to clear and to avoid the odd bug with the display_get_gui_* methods is performant or not.
+function squee_ui_layer_func() {
+	var surf = squee_cache.surfaces.get(layer)
 		
-		if !surface_exists(surf) {
-			surf = squee_cache.surfaces.create(layer)
-		}
-		if event_type == ev_draw {
-			if event_number == ev_draw_normal {
-				surface_set_target(surf)
-			} else if event_number == ev_gui {
-				draw_surface(surf, 0,0)
-			} else if event_number == ev_draw_begin {
-				surface_resize(surf, display_get_gui_width(), display_get_gui_height())
-			}
+	if surf == undefined || !surface_exists(surf) {
+		surf = squee_cache.surfaces.create(layer)
+	}
+	if event_type == ev_draw {
+		if event_number == ev_draw_normal {
+			surface_set_target(surf)
+		} else if event_number == ev_gui {
+			draw_surface(surf, 0,0)
+		} else if event_number == ev_draw_begin {
+			surface_resize(surf, display_get_gui_width(), display_get_gui_height())
 		}
 	}
+}
 
-	function layer_end_draw() {
-		var surf = squee_cache.surfaces.get(layer)
-		if event_type == ev_draw {
-			if event_number == ev_draw_normal {
-				surface_reset_target()
-			} else if event_number == ev_gui {
-				if surface_exists(surf)
-					surface_free(surf)	
-			}
+function squee_ui_layer_end_func() {
+	if event_type == ev_draw {
+		if event_number == ev_draw_normal {
+			surface_reset_target()
 		}
 	}
-	
-	var _layer = layer_gui_get_or_create_layer(layer_id)
-	
-	if is_undefined(squee_cache.surfaces.get(_layer))
-		squee_cache.surfaces.create(_layer)
+}
 
-	layer_script_begin(layer_id, layer_func)
-	layer_script_end(layer_id, layer_end_draw)
+
+/// @desc Creates a SqueeUI enabled sequence. Uses a managed canvas to ensure proper scaling.
+/// @param {string} layer_id The layer id to use (will create a layer if it doesn't already exist)
+/// @param {real} x the x position to draw on the GUI canvas
+/// @param {real} y the y position to draw on the GUI canvas
+/// @param {asset.GMSequence | struct.Sequence} sequence The sequence asset OR object to use to create the sequence instance
+/// @returns {id.SequenceElement} A layer element id representing the sequence instance
+/// @context undefined
+function layer_gui_sequence_create(layer_id, x, y, sequence) {
+
+	layer_gui_get_or_create_layer(layer_id)
+	layer_script_begin(layer_id, squee_ui_layer_func)
+	layer_script_end(layer_id, squee_ui_layer_end_func)
 
 	return layer_sequence_create(layer_id, x, y, sequence)
+}
+
+
+function SqueeUICanvasElement(layer_id, x, y, element, x_relative = true, y_relative = true) constructor {
+
+	seq_element = layer_gui_sequence_create(layer_id, x, y, element)
+
+	self.x_orig = x;
+	self.y_orig = y;
+	self.x_rel = x_relative
+	self.y_rel = y_relative
+	gui_xscale = display_get_gui_width();
+	gui_yscale = display_get_gui_height();
+
+	var reposition = function() {
+		var _width = display_get_gui_width();
+		var _height = display_get_gui_height();
+		if x_rel && gui_xscale != _width {
+			var new_x = x_orig * (_width/gui_xscale)
+			gui_xscale = _width;
+			layer_sequence_x(seq_element, floor(new_x))
+		} else if gui_xscale != _width {
+			//TO-DO?
+		}
+		if y_rel && gui_yscale != _height {
+			var new_y = y_orig * (_height/gui_yscale)
+			gui_yscale = _height
+			layer_sequence_y(seq_element, floor(new_y))
+		} else if gui_yscale != _height {
+			//TO-DO?
+		}
+	}
+
+
+	static sequence_instance_step_event = function(_event = undefined) {
+		var seq_inst = layer_sequence_get_instance(seq_element)
+		if _event = undefined {
+			return seq_inst.original_step_event
+		}
+		seq_inst.original_step_event = _event
+		return seq_inst.original_step_event;
+	}
+	timesource = time_source_create(time_source_game, 1, time_source_units_frames, reposition,[],-1)
+	time_source_start(timesource)
 }
