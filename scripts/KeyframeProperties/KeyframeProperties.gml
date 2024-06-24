@@ -9,7 +9,7 @@ function DataProperty(_context) constructor {
 	
 	 ///@ignore
 	static channel = function() {
-		return 	__data_holder.channel_id++
+		return 	self.__data_holder.channel_id++
 	}
 	
 	///@ignore
@@ -21,14 +21,10 @@ function DataProperty(_context) constructor {
 	
 }
 
-#macro DPWRAPPER DataProperty(_context) constructor
-#macro DPBUILD static build = function()
-#macro DPCHANNEL __data.channel = __channel
-
 /**
  * @param {struct.RealKeyframe} _context Description
  */
-function RealProperty(_context) : DPWRAPPER {
+function RealProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
 	__curve = undefined;
 	///@ignore
@@ -37,25 +33,25 @@ function RealProperty(_context) : DPWRAPPER {
 	/// Assigns an animation curve to this real type keyframe
 	///@param {struct.AnimCurve} _curve the animation curve to assign
 	static curve = function(_curve) {
-		if __is_frozen
+		if self.__is_frozen
 			return self;
-		__curve = _curve;
+		self.__curve = _curve;
 		return self
 	}
 		
 	/// Assigns a real value to this real type keyframe
 	///@param {Real} _value the real value to assign
 	static value = function(_value) {
-		if __is_frozen
+		if self.__is_frozen
 			return self;
 		__value = _value;
 		return self
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_real()
-		DPCHANNEL
+		__data.channel = __channel
 		__data.curve = __curve;
 		__data.value = __value;
 		return __data;
@@ -72,7 +68,7 @@ function RealProperty(_context) : DPWRAPPER {
 	}
 }
 
-function GraphicProperty(_context) : DPWRAPPER {
+function GraphicProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
 	__sprite_index = undefined;
 	/**
@@ -87,9 +83,9 @@ function GraphicProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_graphic();
-		DPCHANNEL
+		__data.channel = __channel
 		__data.spriteIndex = __sprite_index;
 		return __data;
 	}
@@ -104,7 +100,7 @@ function GraphicProperty(_context) : DPWRAPPER {
 	}
 }
 
-function AudioProperty(_context) : DPWRAPPER {
+function AudioProperty(_context) : DataProperty(_context) constructor {
 	
 	///@ignore
 	__emitter_index = undefined;
@@ -147,9 +143,9 @@ function AudioProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_audio();
-		DPCHANNEL
+		__data.channel = __channel
 		__data.emitterIndex = __emitter_index
 		__data.playbackMode = __playback_mode;
 		__data.soundIndex = __sound_index;
@@ -166,9 +162,9 @@ function AudioProperty(_context) : DPWRAPPER {
 	}
 }
 
-function SequenceProperty(_context) : DPWRAPPER {
+function SequenceProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
-	__sequence = undefined;		
+	__sequence = undefined;
 	/**
 		* Function Description
 		* @param {struct.Sequence} _seq Description
@@ -180,9 +176,9 @@ function SequenceProperty(_context) : DPWRAPPER {
 		return self;
 	}
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_sequence()
-		DPCHANNEL
+		__data.channel = __channel
 		__data.sequence = __sequence
 		return __data;
 	}
@@ -196,7 +192,7 @@ function SequenceProperty(_context) : DPWRAPPER {
 	}
 }
 
-function BoolProperty(_context) : DPWRAPPER {
+function BoolProperty(_context) : DataProperty(_context) constructor {
 
 	///@ignore
 	__value = undefined;
@@ -212,9 +208,9 @@ function BoolProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_bool()
-		DPCHANNEL
+		__data.channel = __channel
 		__data.value = __value;
 		return __data
 	}
@@ -229,7 +225,7 @@ function BoolProperty(_context) : DPWRAPPER {
 	}
 }
 
-function SpriteframeProperty(_context) : DPWRAPPER {
+function SpriteframeProperty(_context) : DataProperty(_context) constructor {
 
 	///@ignore
 	__image_index = undefined;
@@ -242,9 +238,9 @@ function SpriteframeProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_spriteframes()
-		DPCHANNEL;
+		__data.channel = __channel;
 		__data.imageIndex = __image_index
 		return __data;
 	}
@@ -258,7 +254,7 @@ function SpriteframeProperty(_context) : DPWRAPPER {
 	}
 }
 
-function StringProperty(_context) : DPWRAPPER {
+function StringProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
 	__value = undefined;
 	
@@ -270,9 +266,9 @@ function StringProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_string()
-		DPCHANNEL;
+		__data.channel = __channel;
 		__data.value = __value;
 		return __data;
 	}
@@ -286,7 +282,7 @@ function StringProperty(_context) : DPWRAPPER {
 	}
 }
 
-function ColorProperty(_context) : DPWRAPPER {
+function ColorProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
 	__color = undefined;
 
@@ -299,9 +295,9 @@ function ColorProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_color()
-		DPCHANNEL;
+		__data.channel = __channel;
 		__data.color = __color;
 		return __data;
 	}
@@ -316,7 +312,7 @@ function ColorProperty(_context) : DPWRAPPER {
 	}
 }
 
-function ColourProperty(_context) : DPWRAPPER {
+function ColourProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
 	__colour = undefined;
 	
@@ -328,9 +324,9 @@ function ColourProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_color()
-		DPCHANNEL;
+		__data.channel = __channel;
 		__data.colour = __colour;
 		return __data;
 	}
@@ -340,7 +336,7 @@ function ColourProperty(_context) : DPWRAPPER {
 	}
 }
 
-function InstanceProperty(_context) : DPWRAPPER {
+function InstanceProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
 	__object_index = undefined;
 		
@@ -352,9 +348,9 @@ function InstanceProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_instance()
-		DPCHANNEL;
+		__data.channel = __channel;
 		__data.objectIndex = __object_index;
 		return __data;
 	}
@@ -369,7 +365,7 @@ function InstanceProperty(_context) : DPWRAPPER {
 	}
 }
 
-function TextProperty(_context) : DPWRAPPER {
+function TextProperty(_context) : DataProperty(_context) constructor {
 
 	///@ignore
 	__text = undefined;
@@ -415,9 +411,9 @@ function TextProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var	__data = sequence_keyframedata_new_text();
-		DPCHANNEL;
+		__data.channel = __channel;
 		__data.alignmentH = __align_h;
 		__data.alignmentV = __align_v;
 		__data.text	 = __text;
@@ -439,7 +435,7 @@ function TextProperty(_context) : DPWRAPPER {
  * Function Description
  * @param {struct.ParticlesKeyframe} _context Description
  */
-function ParticleSystemProperty(_context) : DPWRAPPER {
+function ParticleSystemProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
 	__ps_index = undefined;
 	
@@ -451,9 +447,9 @@ function ParticleSystemProperty(_context) : DPWRAPPER {
 	}
 	
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_particlesystem();
-		DPCHANNEL;
+		__data.channel = __channel;
 		__data.particleSystemIndex = __ps_index;
 		return __data;
 	}
@@ -469,11 +465,10 @@ function ParticleSystemProperty(_context) : DPWRAPPER {
 
 /// @desc Function Description
 /// @param {struct.MomentKeyframe} _context Description
-function MomentProperty(_context) : DPWRAPPER {
+function MomentProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
 	__event = undefined
-	
-	
+
 	static event = function(_ev) {
 		if __is_frozen
 			return self
@@ -481,9 +476,9 @@ function MomentProperty(_context) : DPWRAPPER {
 		return self;
 	}
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_moment();
-		DPCHANNEL;
+		__data.channel = __channel;
 		__data.event = __event
 		return __data;
 	}
@@ -499,7 +494,7 @@ function MomentProperty(_context) : DPWRAPPER {
 
 /// @desc Function Description
 /// @param {struct.MessageKeyframe} _context Description
-function MessageProperty(_context) : DPWRAPPER {
+function MessageProperty(_context) : DataProperty(_context) constructor {
 	///@ignore
 	__events = undefined
 	
@@ -511,9 +506,9 @@ function MessageProperty(_context) : DPWRAPPER {
 		return self;
 	}
 	///@ignore
-	DPBUILD {
+	static build = function() {
 		var __data = sequence_keyframedata_new_message();
-		DPCHANNEL;
+		__data.channel = __channel;
 		__data.events = __events;
 		return __data;
 	}

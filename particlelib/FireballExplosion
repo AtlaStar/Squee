@@ -34,10 +34,6 @@
   "orientationMin": 90.0,
   "orientationRelative": true,
   "orientationWiggle": 0.0,
-  "parent": {
-    "name": "Better Sequences Stuff",
-    "path": "Better Sequences Stuff.yyp",
-  },
   "regionH": 64.0,
   "regionW": 64.0,
   "regionX": 0.0,

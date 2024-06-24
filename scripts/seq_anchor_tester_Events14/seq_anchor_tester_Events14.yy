@@ -1,7 +1,7 @@
 {
   "resourceType": "GMScript",
   "resourceVersion": "1.0",
-  "name": "seq_anchor_tester_events",
+  "name": "seq_anchor_tester_Events14",
   "isCompatibility": false,
   "isDnD": false,
   "parent": {

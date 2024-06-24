@@ -1,0 +1,11 @@
+{
+  "event_step_replacement" : {
+    "enabled" : true
+  },
+  "auto_flatten" : {
+    "enabled" : true
+  },
+  "auto_replace_anchors" : {
+      "enabled" : true
+  }
+}

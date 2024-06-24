@@ -71,10 +71,11 @@ static_set(squee_cache.surfaces, {
 //Also, test if resizing to clear and to avoid the odd bug with the display_get_gui_* methods is performant or not.
 function squee_ui_layer_func() {
 	var surf = squee_cache.surfaces.get(layer)
-		
+
 	if surf == undefined || !surface_exists(surf) {
 		surf = squee_cache.surfaces.create(layer)
 	}
+	
 	if event_type == ev_draw {
 		if event_number == ev_draw_normal {
 			surface_set_target(surf)
@@ -84,6 +85,7 @@ function squee_ui_layer_func() {
 			surface_resize(surf, display_get_gui_width(), display_get_gui_height())
 		}
 	}
+
 }
 
 function squee_ui_layer_end_func() {
@@ -112,9 +114,7 @@ function layer_gui_sequence_create(layer_id, x, y, sequence) {
 }
 
 
-function SqueeUICanvasElement(layer_id, x, y, element, x_relative = true, y_relative = true) constructor {
-
-	seq_element = layer_gui_sequence_create(layer_id, x, y, element)
+function SqueeUICanvasElement(layer_id, x, y, element, x_relative = true, y_relative = true) : SqueeElement(layer_id, element) constructor {
 
 	self.x_orig = x;
 	self.y_orig = y;
@@ -123,34 +123,8 @@ function SqueeUICanvasElement(layer_id, x, y, element, x_relative = true, y_rela
 	gui_xscale = display_get_gui_width();
 	gui_yscale = display_get_gui_height();
 
-	var reposition = function() {
-		var _width = display_get_gui_width();
-		var _height = display_get_gui_height();
-		if x_rel && gui_xscale != _width {
-			var new_x = x_orig * (_width/gui_xscale)
-			gui_xscale = _width;
-			layer_sequence_x(seq_element, floor(new_x))
-		} else if gui_xscale != _width {
-			//TO-DO?
-		}
-		if y_rel && gui_yscale != _height {
-			var new_y = y_orig * (_height/gui_yscale)
-			gui_yscale = _height
-			layer_sequence_y(seq_element, floor(new_y))
-		} else if gui_yscale != _height {
-			//TO-DO?
-		}
+	static create_sequence = function() {
+		__seq_element = layer_gui_sequence_create(__layer, x_orig, y_orig, __sequence)
+		return self;
 	}
-
-
-	static sequence_instance_step_event = function(_event = undefined) {
-		var seq_inst = layer_sequence_get_instance(seq_element)
-		if _event = undefined {
-			return seq_inst.original_step_event
-		}
-		seq_inst.original_step_event = _event
-		return seq_inst.original_step_event;
-	}
-	timesource = time_source_create(time_source_game, 1, time_source_units_frames, reposition,[],-1)
-	time_source_start(timesource)
 }
